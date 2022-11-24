@@ -1,0 +1,26 @@
+.product-details {
+    margin-top: 70px;
+    
+    &__name {
+        font-size: 1.6rem;
+        margin-bottom: 10px;
+    }
+    &__rating {
+        span {
+            i {
+                color: coral;
+            }
+        }
+        p {
+            span {
+                color: coral;
+                font-weight: 500;
+            }
+        }
+    }
+    &__price {
+        font-size: 1.3rem;
+        font-weight: 500;
+        color: #111;
+    }
+}

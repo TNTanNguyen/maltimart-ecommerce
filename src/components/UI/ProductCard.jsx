@@ -1,11 +1,10 @@
-import React from "react";
 import { motion } from "framer-motion";
-import "styles/ProductCard.scss";
-import { Col } from "reactstrap";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addItems } from "redux/slices/cartSlice";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { Col } from "reactstrap";
+import { addItems } from "redux/slices/cartSlice";
+import "styles/product-card.scss";
 const ProductCard = (props) => {
   const dispatch = useDispatch();
 

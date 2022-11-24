@@ -1,8 +1,7 @@
-import React from "react";
-import "styles/Services.scss";
-import { Container, Row, Col } from "reactstrap";
-import { motion } from "framer-motion";
 import serviceData from "assets/data/serviceData";
+import { motion } from "framer-motion";
+import { Col, Container, Row } from "reactstrap";
+import "styles/services.scss";
 
 const Services = () => {
   return (

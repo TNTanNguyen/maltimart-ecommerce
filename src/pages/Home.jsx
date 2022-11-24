@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import Services from "services/Services";
-import "styles/Home.scss";
+import "styles/home.scss";
 
 const Home = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
