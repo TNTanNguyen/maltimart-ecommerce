@@ -24,7 +24,7 @@
     padding-right: 12px;
     padding-left: 2px;
     cursor: pointer;
-    
+
     input {
         width: 100%;
         border: none;
@@ -33,5 +33,15 @@
     }
     span {
         color: var(--primary-color);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .filter__widget {
+        margin-bottom: 30px;
+        select {
+            padding: 7px 20px;
+            font-size: 0.9rem;
+        }
     }
 }
