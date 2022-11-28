@@ -1,6 +1,6 @@
 import logo from "assets/images/eco-logo.png";
 import userIcon from "assets/images/user-icon.png";
-import { NavLink,useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Col, Container, Row } from "reactstrap";
 import "styles/header.scss";
 import { motion } from "framer-motion";
@@ -26,9 +26,9 @@ const Header = () => {
 
   const menuRef = useRef(null);
 
-  const totalQuantity = useSelector(state => state.cart.totalQuantity)
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const stickyHeaderFunc = () => {
     window.addEventListener("scroll", () => {
@@ -46,12 +46,12 @@ const Header = () => {
     stickyHeaderFunc();
     return () => window.removeEventListener("scroll", stickyHeaderFunc);
   }, []);
-  
+
   const menuToggle = () => menuRef.current.classList.toggle("active__menu");
 
-  const navigateToCart = () =>{
-    navigate('/cart')
-  }
+  const navigateToCart = () => {
+    navigate("/cart");
+  };
   return (
     <header className="header" ref={headerRef}>
       <Container>
@@ -90,7 +90,13 @@ const Header = () => {
                   <span className="badge">{totalQuantity}</span>
                 </span>
                 <span>
-                  <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt="" />
+                  <Link to="/login">
+                    <motion.img
+                      whileTap={{ scale: 1.2 }}
+                      src={userIcon}
+                      alt=""
+                    />
+                  </Link>
                 </span>
                 <div className="mobile__menu">
                   <span onClick={menuToggle}>
