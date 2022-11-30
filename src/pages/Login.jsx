@@ -1,11 +1,11 @@
 import Helmet from "components/Helmet/Helmet";
+import { auth } from "firebase.config";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { Col, Container, Form, FormGroup, Row } from "reactstrap";
 import "styles/login.scss";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "firebase.config";
-import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
