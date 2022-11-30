@@ -32,7 +32,9 @@
         align-items: center;
         -moz-column-gap: 1.2rem;
         column-gap: 1.2rem;
-        span {
+        .profile {
+            position: relative;
+            z-index: 9;
             i {
                 font-size: 1.4rem;
                 color: var(--primary-color);
@@ -41,6 +43,22 @@
             img {
                 width: 30px;
                 height: 30px;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            .profile__actions {
+                position: absolute;
+                top: calc(100% - 2px);
+                left: 0;
+                width: 150px;
+                z-index: 10;
+                padding: 10px 15px;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                background: var(--card-bg-01);
+                line-height: 30px;
+                display: none;
                 cursor: pointer;
             }
         }
@@ -72,6 +90,11 @@
         display: none;
     }
 }
+
+.show__profileActions {
+    display: block !important;
+}
+
 .logo {
     display: flex;
     -moz-column-gap: 8px;
@@ -130,8 +153,8 @@
         }
         .mobile__menu {
             display: block;
-            i{
-                font-size: 1.1rem!important;
+            i {
+                font-size: 1.1rem !important;
             }
         }
         .active__menu {
@@ -142,8 +165,8 @@
             .fav__icon i {
                 font-size: 1.2rem;
             }
-            span{
-                img{
+            span {
+                img {
                     width: 1.4rem;
                     height: 1.4rem;
                 }
