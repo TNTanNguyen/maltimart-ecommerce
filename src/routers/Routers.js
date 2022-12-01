@@ -30,6 +30,7 @@ const Routers = () => {
         <Route path="dashboard/all-products" element={<AllProducts />} />
         <Route path="dashboard/orders" element={<AddProduct />} />
       </Route>
+      
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<Signup />} />
       {/* <Route path="*" element={<PageNotFound />} /> */}

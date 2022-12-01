@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "firebase.config";
 const useAuth = () => {
@@ -14,7 +14,7 @@ const useAuth = () => {
     });
   });
 
-  return {currentUser}
+  return { currentUser };
 };
 
 export default useAuth;

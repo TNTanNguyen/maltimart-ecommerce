@@ -21,11 +21,12 @@
             }
         }
         .search__box {
+            position: relative;
             button {
                 position: absolute;
                 border: none;
                 background: transparent;
-                right: 15px;
+                right: 30px;
                 font-size: 18px;
             }
         }
