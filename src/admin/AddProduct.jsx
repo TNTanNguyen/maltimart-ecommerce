@@ -18,6 +18,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
   const addProduct = async (e) => {
     e.preventDefault();
+    
     setLoading(true);
     // ==== add product to the firebase database ======
 
