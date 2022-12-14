@@ -1,9 +1,14 @@
 import useGetData from "custom-hooks/useGetData";
 import { Col, Container, Row } from "reactstrap";
-
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "firebase.config";
+import { toast } from "react-toastify";
 const Users = () => {
-  const {usersData,loading} = useGetData();
-  console.log(usersData);
+  const { data: usersData, loading } = useGetData("users");
+  const deleteUser = async (id) => {
+    await deleteDoc(doc(db, "users", id));
+    toast.success("Delete user successfully!");
+  };
   return (
     <section>
       <Container>
@@ -22,19 +27,23 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody>
-                {/* {productsData.map((item) => (
-                    <tr key={item.id}>
-                      <td>
-                        <img src={item.imgUrl} alt={item.productName} />
-                      </td>
-                      <td>{item.title}</td>
-                      <td>{item.category}</td>
-                      <td>${item.price}</td>
-                      <td>
-                        <button className="btn btn-danger" onClick={()=> deleteProduct(item.id)}>Delete</button>
-                      </td>
-                    </tr>
-                  ))} */}
+                {usersData.map((user) => (
+                  <tr key={user.uid}>
+                    <td>
+                      <img src={user.photoURL} alt={user.displayName} />
+                    </td>
+                    <td>{user.displayName}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger"
+                        onClick={() => deleteUser(user.uid)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </Col>

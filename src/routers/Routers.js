@@ -31,7 +31,6 @@ const Routers = () => {
         <Route path="dashboard/all-products" element={<AllProducts />} />
         <Route path="dashboard/orders" element={<AddProduct />} />
         <Route path="dashboard/users" element={<Users />} />
-        
       </Route>
       
       <Route path="login" element={<Login />} />

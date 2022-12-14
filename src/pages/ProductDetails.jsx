@@ -1,4 +1,4 @@
-import products from "assets/data/products";
+// import products from "assets/data/products";
 import Helmet from "components/Helmet/Helmet";
 import CommonSection from "components/UI/CommonSection";
 import ProductList from "components/UI/ProductList";
@@ -10,28 +10,49 @@ import { toast } from "react-toastify";
 import { Col, Container, Row } from "reactstrap";
 import { addItems } from "redux/slices/cartSlice";
 import "styles/product-details.scss";
+import { db } from "firebase.config";
+import { doc, getDoc } from "firebase/firestore";
+import useGetData from "custom-hooks/useGetData";
 
 const ProductDetails = () => {
+  const [product, setProduct] = useState({});
   const [tab, setTab] = useState("desc");
-
   const reviewUser = useRef("");
   const reviewMsg = useRef("");
-
   const [rating, setRating] = useState(null);
-
   const { id } = useParams();
-  const product = products.find((item) => item.id === id);
+
+  // const product = products.find((item) => item.id === id);
+
+  const { data: products } = useGetData("products");
+
+  const docRef = doc(db, "products", id);
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const docSnap = await getDoc(docRef);
+      console.log("da lay products");
+      if (docSnap.exists()) {
+        setProduct(docSnap.data());
+      } else {
+        console.log("No Product!");
+      }
+    };
+    getProduct();
+  }, []);
+
   const {
     imgUrl,
     productName,
     price,
-    avgRating,
-    reviews,
+    // avgRating,
+    // reviews,
     description,
     shortDesc,
     category,
   } = product;
 
+  console.log(product);
   const dispatch = useDispatch();
 
   const addtoCart = () => {
@@ -71,50 +92,56 @@ const ProductDetails = () => {
       <section className="p-0">
         <Container>
           <Row>
-            <Col lg="6">
-              <img src={imgUrl} alt="" />
-            </Col>
-            <Col lg="6">
-              <div className="product-details">
-                <h2 className="product-details__name">{productName}</h2>
-                <div className="product-details__rating d-flex align-items-center gap-5 mb-3">
-                  <div>
-                    <span>
-                      <i className="ri-star-s-fill"></i>
-                    </span>
-                    <span>
-                      <i className="ri-star-s-fill"></i>
-                    </span>
-                    <span>
-                      <i className="ri-star-s-fill"></i>
-                    </span>
-                    <span>
-                      <i className="ri-star-s-fill"></i>
-                    </span>
-                    <span>
-                      <i className="ri-star-half-s-line"></i>
-                    </span>
+            {Object.keys(product).length === 0 ? (
+              <h5 className="fw-bold mt-3">Loading.....</h5>
+            ) : (
+              <>
+                <Col lg="6">
+                  <img src={imgUrl} alt="" />
+                </Col>
+                <Col lg="6">
+                  <div className="product-details">
+                    <h2 className="product-details__name">{productName}</h2>
+                    <div className="product-details__rating d-flex align-items-center gap-5 mb-3">
+                      <div>
+                        <span>
+                          <i className="ri-star-s-fill"></i>
+                        </span>
+                        <span>
+                          <i className="ri-star-s-fill"></i>
+                        </span>
+                        <span>
+                          <i className="ri-star-s-fill"></i>
+                        </span>
+                        <span>
+                          <i className="ri-star-s-fill"></i>
+                        </span>
+                        <span>
+                          <i className="ri-star-half-s-line"></i>
+                        </span>
+                      </div>
+                      <p>{/* (<span>{avgRating}</span> ratings) */}</p>
+                    </div>
+
+                    <div className="d-flex align-items-center gap-5">
+                      <p className="product-details__price">${price}</p>
+                      <span>Category: {category.toUpperCase()}</span>
+                    </div>
+
+                    <p className="product-details__shortDesc mt-3">
+                      {shortDesc}
+                    </p>
+                    <motion.button
+                      whileTap={{ scale: 1.2 }}
+                      className="buy__btn"
+                      onClick={addtoCart}
+                    >
+                      Add to Cart
+                    </motion.button>
                   </div>
-                  <p>
-                    (<span>{avgRating}</span> ratings)
-                  </p>
-                </div>
-
-                <div className="d-flex align-items-center gap-5">
-                  <p className="product-details__price">${price}</p>
-                  <span>Category: {category.toUpperCase()}</span>
-                </div>
-
-                <p className="product-details__shortDesc mt-3">{shortDesc}</p>
-                <motion.button
-                  whileTap={{ scale: 1.2 }}
-                  className="buy__btn"
-                  onClick={addtoCart}
-                >
-                  Add to Cart
-                </motion.button>
-              </div>
-            </Col>
+                </Col>
+              </>
+            )}
           </Row>
         </Container>
       </section>
@@ -133,7 +160,8 @@ const ProductDetails = () => {
                   className={tab === "rev" ? "active__tab" : ""}
                   onClick={() => setTab("rev")}
                 >
-                  Reviews ({reviews.length})
+                  Reviews
+                  {/* ({reviews.length}) */}
                 </h6>
               </div>
               {tab === "desc" ? (
@@ -143,7 +171,7 @@ const ProductDetails = () => {
               ) : (
                 <div className="product__review mt-3">
                   <div className="review__wrapper">
-                    <ul>
+                    {/* <ul>
                       {reviews?.map((item, index) => {
                         return (
                           <li key={index} className="mb-4">
@@ -153,7 +181,7 @@ const ProductDetails = () => {
                           </li>
                         );
                       })}
-                    </ul>
+                    </ul> */}
                     <div className="review__form">
                       <h4>Leave your experience</h4>
                       <form action="" onSubmit={submitHandler}>

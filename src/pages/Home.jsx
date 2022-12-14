@@ -1,9 +1,9 @@
-import products from "assets/data/products";
 import counterImg from "assets/images/counter-timer-img.png";
 import heroImg from "assets/images/hero-img.png";
 import Helmet from "components/Helmet/Helmet";
 import Clock from "components/UI/Clock";
 import ProductList from "components/UI/ProductList";
+import useGetData from "custom-hooks/useGetData";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -17,6 +17,8 @@ const Home = () => {
   const [mobileProducts, setMobileProducts] = useState([]);
   const [wirelessProducts, setWirelessProducts] = useState([]);
   const [popularProducts, setPopularProducts] = useState([]);
+
+  const { data: products, loading } = useGetData("products");
 
   useEffect(() => {
     const filteredTrendingProducts = products.filter(
@@ -39,7 +41,7 @@ const Home = () => {
     setMobileProducts(filteredMobileProducts);
     setWirelessProducts(filteredWirelessProducts);
     setPopularProducts(filteredPopularProducts);
-  }, []);
+  }, [products]);
 
   const year = new Date().getFullYear();
   return (
@@ -76,7 +78,13 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Trending Product</h2>
             </Col>
-            <ProductList data={trendingProducts} />
+            {loading ? (
+              <div className="text-center">
+                <div className="spinner-border" role="status"></div>
+              </div>
+            ) : (
+              <ProductList data={trendingProducts} />
+            )}
           </Row>
         </Container>
       </section>
@@ -86,7 +94,13 @@ const Home = () => {
             <Col lg="12" className="text-center">
               <h2 className="section__title">Best Sales</h2>
             </Col>
-            <ProductList data={bestSalesProducts} />
+            {loading ? (
+              <div className="text-center">
+                <div className="spinner-border" role="status"></div>
+              </div>
+            ) : (
+              <ProductList data={bestSalesProducts} />
+            )}
           </Row>
         </Container>
       </section>
@@ -118,8 +132,20 @@ const Home = () => {
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">New Arrivals</h2>
             </Col>
-            <ProductList data={mobileProducts} />
-            <ProductList data={wirelessProducts} />
+            {loading ? (
+              <div className="text-center">
+                <div className="spinner-border" role="status"></div>
+              </div>
+            ) : (
+              <ProductList data={mobileProducts} />
+            )}
+            {loading ? (
+              <div className="text-center">
+                <div className="spinner-border" role="status"></div>
+              </div>
+            ) : (
+              <ProductList data={wirelessProducts} />
+            )}
           </Row>
         </Container>
       </section>
@@ -129,7 +155,13 @@ const Home = () => {
             <Col lg="12" className="text-center mb-5">
               <h2 className="section__title">Popular in Category</h2>
             </Col>
-            <ProductList data={popularProducts} />
+            {loading ? (
+              <div className="text-center">
+                <div className="spinner-border" role="status"></div>
+              </div>
+            ) : (
+              <ProductList data={popularProducts} />
+            )}
           </Row>
         </Container>
       </section>
