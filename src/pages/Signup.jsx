@@ -26,7 +26,9 @@ const Signup = () => {
 
       const user = userCredential.user;
       console.log(user);
-    } catch (error) {}
+    } catch (error) {
+      
+    }
   };
 
   return (

@@ -9,7 +9,7 @@ const Clock = () => {
   let interval;
   const countDown = () => {
     //Thời gian chọn
-    const destination = new Date("Nov 30, 2022").getTime();
+    const destination = new Date("Jan 01, 2025").getTime();
 
     interval = setInterval(() => {
       const now = new Date().getTime(); //Thời gian hiện tại
